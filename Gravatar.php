@@ -1,11 +1,13 @@
 <?php /** @noinspection HttpUrlsUsage */ declare(strict_types = 1);
 
-namespace Vairogs\Utils\Helper;
+namespace Vairogs\Utils;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Vairogs\Core\Attribute\CoreFilter;
-use Vairogs\Core\Attribute\CoreFunction;
+use Vairogs\Functions\Iteration;
+use Vairogs\Functions\Php;
+use Vairogs\Functions\Uri;
+use Vairogs\Functions\Validate;
 
 use function hash;
 use function http_build_query;
@@ -31,8 +33,6 @@ final class Gravatar
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    #[CoreFunction]
-    #[CoreFilter]
     public function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
         if (!(new Validate())->validateEmail(email: $email)) {
